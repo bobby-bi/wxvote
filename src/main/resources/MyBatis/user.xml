@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.dao.UserDao">
+
+    <select id="getMatchOpenId" resultType="int" parameterType="String">
+        select count(*) from tbl_user where openid = #{openid}
+    </select>
+    <insert id="addUser" parameterType="com.library.bean.User">
+        insert into tbl_user values
+        (null, #{name}, #{openid}, #{image}, #{gender})
+    </insert>
+    <select id="getIdByOpenId" resultType="int" parameterType="String">
+        select id from tbl_user where openid = #{openid}
+    </select>
+    <select id="getUserById" resultType="com.library.bean.User" parameterType="int">
+        select * from tbl_user where id = #{id}
+    </select>
+    <select id="getIdByVoteId" resultType="int" parameterType="int">
+        select userid from tbl_selectdetail where voteId = #{voteId}
+    </select>
+    <select id="getIdByOptionId" resultType="int" parameterType="int">
+        select userid from tbl_selectdetail where optionId = #{optionId}
+    </select>
+</mapper>

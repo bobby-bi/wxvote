@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.dao.VoteDao">
+
+    <select id="getAllVote" resultType="com.library.bean.Vote" >
+        select * from tbl_vote
+    </select>
+    <update id="setEnd" parameterType="int">
+        update tbl_vote set end= 2 where id=#{id}
+    </update>
+    <select id="getAllVoteById" resultType="com.library.bean.Vote" parameterType="int">
+        select * from tbl_vote where id=#{id}
+    </select>
+    <insert id="addVote"  parameterType="com.library.bean.Vote">
+        insert into tbl_vote values
+        (null, #{title}, #{votedesc}, #{votetype}, #{starttime},
+        #{endtime}, #{isanonymous}, #{image}, #{userid},
+        #{end}, #{vshow})
+    </insert>
+    <select id="maxId" resultType="int" >
+        select max(id) from tbl_vote
+    </select>
+    <select id="getVoteByUserId" resultType="com.library.bean.Vote" parameterType="int">
+        select * from tbl_vote where userid=#{id}
+    </select>
+    <select id="getJoinVoteIdByUserId" resultType="int" parameterType="int">
+        select voteid from tbl_selectdetail where userid=#{id}
+    </select>
+    <select id="getVoteById" resultType="com.library.bean.Vote" parameterType="int">
+        select * from tbl_vote where id=#{id}
+    </select>
+    <delete id="deleteVoteById"  parameterType="int">
+        delete from tbl_vote where id=#{id}
+    </delete>
+</mapper>

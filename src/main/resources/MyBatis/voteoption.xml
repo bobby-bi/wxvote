@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.library.dao.VoteoptionDao">
+
+    <select id="getOptionByVoteId" resultType="com.library.bean.Voteoption" parameterType="int">
+        select * from tbl_voteoption where voteid = #{voteid}
+    </select>
+    <select id="matchOptionIdCount" resultType="int" parameterType="int">
+        select count(*) from tbl_selectdetail where optionid = #{optionid}
+    </select>
+    <insert id="addSelect">
+         insert into tbl_selectdetail values
+        (null, #{voteid}, #{userid}, #{optionid})
+    </insert>
+    <insert id="addOption">
+         insert into tbl_voteoption values
+        (null, #{vdesc}, #{voteid})
+    </insert>
+    <delete id="deleteVoteOptionByVoteId"  parameterType="int">
+        delete from tbl_voteoption where voteid=#{id}
+    </delete>
+    <delete id="deleteSelectByVoteId"  parameterType="int">
+        delete from tbl_selectdetail where voteid=#{id}
+    </delete>
+</mapper>
