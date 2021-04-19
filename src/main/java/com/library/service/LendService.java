@@ -12,12 +12,12 @@ public class LendService {
     @Autowired
     private LendDao lendDao;
 
-    public boolean returnBook(long bookId, long readerId){
-        return lendDao.returnBookOne(bookId, readerId)>0 && lendDao.returnBookTwo(bookId)>0;
+    public boolean returnBook(String bookName, long readerId){
+        return lendDao.returnBookOne(bookName, readerId)>0 && lendDao.returnBookTwo(bookName)>0;
     }
 
-    public boolean lendBook(long bookId,long readerId){
-        return lendDao.lendBookOne(bookId,readerId)>0 && lendDao.lendBookTwo(bookId)>0;
+    public boolean lendBook(String bookName,long readerId){
+        return lendDao.lendBookOne(bookName,readerId)>0 && lendDao.lendBookTwo(bookName)>0;
     }
 
     public ArrayList<Lend> lendList(){

@@ -2,7 +2,10 @@ package com.library.controller;
 
 import com.library.bean.Admin;
 import com.library.bean.ReaderCard;
+import com.library.bean.ReaderInfo;
 import com.library.service.LoginService;
+import com.library.service.ReaderCardService;
+import com.library.service.ReaderInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,13 +16,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 @Controller
 public class LoginController {
 
     private LoginService loginService;
-
+    @Autowired
+    private ReaderInfoService readerInfoService;
+    @Autowired
+    private ReaderCardService readerCardService;
 
     @Autowired
     public void setLoginService(LoginService loginService) {
@@ -69,6 +78,10 @@ public class LoginController {
             res.put("msg", "账号或密码错误！");
         }
         return res;
+    }
+    @RequestMapping("/register")
+    public ModelAndView register(HttpServletResponse response) {
+        return new ModelAndView("register");
     }
 
     @RequestMapping("/admin_main.html")
@@ -127,6 +140,33 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("error", "旧密码错误！");
             return "redirect:/reader_repasswd.html";
         }
+    }
+    private ReaderInfo getReaderInfo(long readerId, String name, String sex, String birth, String address, String phone) {
+        ReaderInfo readerInfo = new ReaderInfo();
+        Date date = new Date();
+        try {
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            date = df.parse(birth);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        readerInfo.setAddress(address);
+        readerInfo.setName(name);
+        readerInfo.setReaderId(readerId);
+        readerInfo.setPhone(phone);
+        readerInfo.setSex(sex);
+        readerInfo.setBirth(date);
+        return readerInfo;
+    }
+    @RequestMapping("register.html")
+    public String readerInfoAddDo(String name, String sex, String birth, String address, String phone, String password, RedirectAttributes redirectAttributes) {
+        ReaderInfo readerInfo = getReaderInfo(0, name, sex, birth, address, phone);
+        long readerId = readerInfoService.addReaderInfo(readerInfo);
+        readerInfo.setReaderId(readerId);
+        if (readerId > 0 && readerCardService.addReaderCard(readerInfo, password)) {
+            redirectAttributes.addFlashAttribute("succ", "注册成功！ 账号和读者证编号为："+readerId);
+        }
+        return "redirect:/";
     }
 
     //配置404页面

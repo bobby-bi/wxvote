@@ -6,7 +6,7 @@ import java.util.Date;
 public class Lend implements Serializable {
 
     private long ser_num;
-    private long book_id;
+    private String book_name;
     private long reader_id;
     private Date lend_date;
     private Date back_date;
@@ -19,12 +19,12 @@ public class Lend implements Serializable {
         this.reader_id = reader_id;
     }
 
-    public long getBookId() {
-        return book_id;
+    public String getBookName() {
+        return book_name;
     }
 
-    public void setBookId(long book_id) {
-        this.book_id = book_id;
+    public void setBookName(String book_name) {
+        this.book_name = book_name;
     }
 
     public void setSer_num(long ser_num) {

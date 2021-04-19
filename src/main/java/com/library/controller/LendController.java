@@ -58,9 +58,9 @@ public class LendController {
 
     @RequestMapping("/lendbook.html")
     public String bookLend(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        long bookId = Long.parseLong(request.getParameter("bookId"));
+        String bookName = request.getParameter("bookName");
         long readerId = ((ReaderCard) request.getSession().getAttribute("readercard")).getReaderId();
-        if (lendService.lendBook(bookId, readerId)) {
+        if (lendService.lendBook(bookName, readerId)) {
             redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
         } else {
             redirectAttributes.addFlashAttribute("succ", "图书借阅成功！");
@@ -70,9 +70,9 @@ public class LendController {
 
     @RequestMapping("/returnbook.html")
     public String bookReturn(HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        long bookId = Long.parseLong(request.getParameter("bookId"));
+        String bookName = request.getParameter("bookName");
         long readerId = ((ReaderCard) request.getSession().getAttribute("readercard")).getReaderId();
-        if (lendService.returnBook(bookId, readerId)) {
+        if (lendService.returnBook(bookName, readerId)) {
             redirectAttributes.addFlashAttribute("succ", "图书归还成功！");
         } else {
             redirectAttributes.addFlashAttribute("error", "图书归还失败！");

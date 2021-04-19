@@ -56,16 +56,16 @@ background-attachment: fixed;">
                     <td>${detail.pubdate}</td>
                 </tr>
                 <tr>
-                    <th>分类号</th>
-                    <td>${detail.classId}</td>
+                    <th>分类</th>
+                    <td>${className}</td>
                 </tr>
                 <tr>
                     <th>状态</th>
-                    <c:if test="${detail.number>1}">
-                        <td>在馆</td>
+                    <c:if test="${detail.number>0}">
+                        <td>有剩余</td>
                     </c:if>
                     <c:if test="${detail.number==0}">
-                        <td>借出</td>
+                        <td>已借完</td>
                     </c:if>
 
                 </tr>

@@ -4,6 +4,7 @@ import com.library.bean.Book;
 import com.library.bean.Lend;
 import com.library.bean.ReaderCard;
 import com.library.service.BookService;
+import com.library.service.ClassService;
 import com.library.service.LendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,8 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private LendService lendService;
+    @Autowired
+    private ClassService classService;
 
     private Date getDate(String pubstr) {
         try {
@@ -107,8 +110,11 @@ public class BookController {
     public ModelAndView adminBookDetail(HttpServletRequest request) {
         long bookId = Long.parseLong(request.getParameter("bookId"));
         Book book = bookService.getBook(bookId);
+        int classId = book.getClassId();
+        String className = classService.getClass(classId);
         ModelAndView modelAndView = new ModelAndView("admin_book_detail");
         modelAndView.addObject("detail", book);
+        modelAndView.addObject("className", className);
         return modelAndView;
     }
 
@@ -116,8 +122,11 @@ public class BookController {
     public ModelAndView readerBookDetail(HttpServletRequest request) {
         long bookId = Long.parseLong(request.getParameter("bookId"));
         Book book = bookService.getBook(bookId);
+        int classId = book.getClassId();
+        String className = classService.getClass(classId);
         ModelAndView modelAndView = new ModelAndView("reader_book_detail");
         modelAndView.addObject("detail", book);
+        modelAndView.addObject("className", className);
         return modelAndView;
     }
 
@@ -136,11 +145,11 @@ public class BookController {
         ArrayList<Book> books = bookService.getAllBooks();
         ReaderCard readerCard = (ReaderCard) request.getSession().getAttribute("readercard");
         ArrayList<Lend> myAllLendList = lendService.myLendList(readerCard.getReaderId());
-        ArrayList<Long> myLendList = new ArrayList<>();
+        ArrayList<String> myLendList = new ArrayList<>();
         for (Lend lend : myAllLendList) {
             // 是否已归还
             if (lend.getBackDate() == null) {
-                myLendList.add(lend.getBookId());
+                myLendList.add(lend.getBookName());
             }
         }
         ModelAndView modelAndView = new ModelAndView("reader_books");

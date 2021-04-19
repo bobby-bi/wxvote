@@ -10,6 +10,14 @@
         $(function () {
             $('#header').load('admin_header.html');
         })
+        function del() {
+            var an= confirm("是否删除?");
+            if(an){
+                return true;
+            }else{
+                return false;
+            }
+        }
     </script>
 </head>
 <body background="img/book1.jpg" style=" background-repeat:no-repeat ;
@@ -91,7 +99,7 @@ background-attachment: fixed;">
                     <button type="button" class="btn btn-success btn-xs">详情</button>
                 </a></td>
                 <td><a href="updatebook.html?bookId=<c:out value="${book.bookId}"></c:out>"><button type="button" class="btn btn-info btn-xs">编辑</button></a></td>
-                <td><a href="deletebook.html?bookId=<c:out value="${book.bookId}"></c:out>"><button type="button" class="btn btn-danger btn-xs">删除</button></a></td>
+                <td><a href="deletebook.html?bookId=<c:out value="${book.bookId}"></c:out>" onclick="return del();"><button type="button" class="btn btn-danger btn-xs">删除</button></a></td>
             </tr>
             </c:forEach>
             </tbody>

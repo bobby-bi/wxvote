@@ -91,18 +91,18 @@ background-attachment: fixed;">
 
                     <c:set var="flag" value="false"/>
                     <c:forEach var="lend" items="${myLendList}">
-                        <c:if test="${lend eq book.bookId}">
+                        <c:if test="${lend eq book.name}">
                             <c:set var="flag" value="true"/>
                         </c:if>
                     </c:forEach>
                     <c:if test="${flag}">
-                        <td><a href="returnbook.html?bookId=<c:out value="${book.bookId}"></c:out>">
+                        <td><a href="returnbook.html?bookName=<c:out value="${book.name}"></c:out>">
                             <button type="button" class="btn btn-danger btn-xs">归还</button>
                         </a></td>
                     </c:if>
                     <c:if test="${not flag}">
                         <c:if test="${book.number>0}">
-                            <td><a href="lendbook.html?bookId=<c:out value="${book.bookId}"></c:out>">
+                            <td><a href="lendbook.html?bookName=<c:out value="${book.name}"></c:out>">
                                 <button type="button" class="btn btn-primary btn-xs">借阅</button>
                             </a></td>
                         </c:if>

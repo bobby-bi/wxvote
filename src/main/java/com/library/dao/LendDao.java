@@ -18,26 +18,26 @@ public class LendDao {
 
     private final static String NAMESPACE = "com.library.dao.LendDao.";
 
-    public int returnBookOne(final long book_id, long reader_id) {
+    public int returnBookOne(final String book_name, long reader_id) {
         Map<String, Object> map = new HashMap<>();
-        map.put("book_id", book_id);
+        map.put("book_name", book_name);
         map.put("reader_id", reader_id);
         return sqlSessionTemplate.update(NAMESPACE + "returnBookOne", map);
     }
 
-    public int returnBookTwo(final long book_id) {
-        return sqlSessionTemplate.update(NAMESPACE + "returnBookTwo", book_id);
+    public int returnBookTwo(final String book_name) {
+        return sqlSessionTemplate.update(NAMESPACE + "returnBookTwo", book_name);
     }
 
-    public int lendBookOne(final long book_id, final long reader_id) {
+    public int lendBookOne(final String book_name, final long reader_id) {
         Map<String, Object> map = new HashMap<>();
-        map.put("book_id", book_id);
+        map.put("book_name", book_name);
         map.put("reader_id", reader_id);
         return sqlSessionTemplate.insert(NAMESPACE + "lendBookOne", map);
     }
 
-    public int lendBookTwo(final long book_id) {
-        return sqlSessionTemplate.update(NAMESPACE + "lendBookTwo", book_id);
+    public int lendBookTwo(final String book_name) {
+        return sqlSessionTemplate.update(NAMESPACE + "lendBookTwo", book_name);
     }
 
     public ArrayList<Lend> lendList() {

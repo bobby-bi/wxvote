@@ -36,6 +36,15 @@ background-attachment: fixed;">
             window.location.href="login.html";
 </script>
 </c:if>
+<c:if test="${!empty succ}">
+    <div class="alert alert-success alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert"
+                aria-hidden="true">
+            &times;
+        </button>
+            ${succ}
+    </div>
+</c:if>
 <h2 style="text-align: center; color: white; font-family: '华文行楷'; font-size: 500%">图 书 馆</h2>
 
 <div class="panel panel-default" id="login">
@@ -60,6 +69,7 @@ background-attachment: fixed;">
         <p style="text-align: right;color: red;position: absolute" id="info"></p><br/>
         <button id="loginButton"  class="btn btn-primary  btn-block">登陆
         </button>
+        <a href="register" class="btn btn-primary  btn-block">注册</a>
     </div>
 </div>
     <script>

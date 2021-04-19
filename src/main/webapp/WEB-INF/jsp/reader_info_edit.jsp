@@ -53,7 +53,7 @@ background-attachment: fixed;">
                 <script>
                     $("#edit").submit(function () {
                         if($("#name").val()==''||$("#sex").val()==''||$("#birth").val()==''||$("#address").val()==''||$("#phone").val()==''){
-                            alert("请填入完整图书信息！");
+                            alert("请填入完整个人信息！");
                             return false;
                         }
                     })

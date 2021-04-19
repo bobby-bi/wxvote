@@ -47,7 +47,7 @@ background-attachment: fixed;">
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>图书号</th>
+                <th>图书名</th>
                 <th>借出日期</th>
                 <th>归还日期</th>
                 <th>状态</th>
@@ -56,7 +56,7 @@ background-attachment: fixed;">
             <tbody>
             <c:forEach items="${list}" var="alog">
                 <tr>
-                    <td><c:out value="${alog.bookId}"></c:out></td>
+                    <td><c:out value="${alog.bookName}"></c:out></td>
                     <td><c:out value="${alog.lendDate}"></c:out></td>
                     <td><c:out value="${alog.backDate}"></c:out></td>
                     <c:if test="${empty alog.backDate}">
